@@ -116,9 +116,9 @@ class FreeboxOSAPI(object):
         print(json.dumps(json_res, sort_keys=True, indent=4, separators=(',', ': ')))
 
 
-    def toggle_wifi(self):
+    def toggle_wifi(self, active=False):
         """ Toggle the wifi state. """
-        put_data = { 'ap_params': { 'enabled': not self.get_wifi_status() } }
+        put_data = { 'ap_params': { 'enabled': active } }
         response = requests.put(WIFI_CONFIG, data=json.dumps(put_data),
                                 headers=self.get_headers())
         jr = json.loads(response.text)
@@ -126,4 +126,12 @@ class FreeboxOSAPI(object):
             self.logger.info('Wifi toggled')
         else:
             self.logger.error('Failed to update wifi status!')
+
+
+    def wifi_on(self):
+        self.toggle_wifi(True)
+
+
+    def wifi_off(self):
+        self.toggle_wifi()
 
