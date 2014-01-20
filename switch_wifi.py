@@ -19,10 +19,6 @@ def open():
     return(api)
 
 
-def close(api):
-    time.sleep(1)
-    api.get_wifi_status()
-
 def main(argv):
 
     if (len(argv) == 1):
@@ -32,10 +28,8 @@ def main(argv):
         api = open()
         if (argv[1] == "on"):
             api.wifi_on()
-            close(api)
         elif (argv[1] == "off"):
             api.wifi_off()
-            close(api)
         else:
             usage()
     else:

@@ -131,9 +131,13 @@ class FreeboxOSAPI(object):
     def wifi_on(self):
         if not self.get_wifi_status():
             self.toggle_wifi(True)
+            time.sleep(1)
+            self.get_wifi_status()
 
 
     def wifi_off(self):
         if self.get_wifi_status():
             self.toggle_wifi()
+            time.sleep(1)
+            self.get_wifi_status()
 
