@@ -4,7 +4,6 @@
 # system
 import argparse
 import sys
-import time
 # local
 from freebos import FreeboxOSAPI
 
