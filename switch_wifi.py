@@ -26,7 +26,6 @@ def main(argv):
         api.get_wifi_status()
     elif (len(argv) == 2):
         api = open()
-        active = api.get_wifi_status()
         if (argv[1] == "on"):
             api.wifi_on()
         elif (argv[1] == "off"):
