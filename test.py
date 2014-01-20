@@ -8,14 +8,11 @@ import time
 from freebos import FreeboxOSAPI
 
 
-def main():
+def test_venv2():
     freebox_api = FreeboxOSAPI()
     freebox_api.open_session()
 
     #freebox_api.toggle_wifi()
     #time.sleep(1)
-    freebox_api.get_wifi_status()
+    #freebox_api.get_wifi_status()
 
-
-if __name__ == '__main__':
-    main()

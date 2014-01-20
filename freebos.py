@@ -64,8 +64,12 @@ class FreeboxOSAPI(object):
         if not self.password:
             from hashlib import sha1
             import hmac
-
-            digest = hmac.new(APP_TOKEN, self.challenge, sha1)
+            digest = None
+            try:
+                digest = hmac.new(APP_TOKEN, self.challenge, sha1)
+            except:
+                digest = hmac.new(bytes(APP_TOKEN, 'utf-8'),
+                                    bytes(self.challenge, 'utf-8'), sha1)
             self.password = digest.hexdigest()
         return(self.password)
 
