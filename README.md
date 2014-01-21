@@ -10,7 +10,7 @@ freebos has been successfully tested with Python 2.7 and Python 3.3. You'll need
 
 Then use it with:
 
-    ./bin/venv3/python wifi [on|off]
+    ./bin/venv/python wifi [on|off]
 
 
 ## Usage
@@ -18,15 +18,15 @@ The only command for the moment is `wifi`, used to switch the wifi on or off.
 
 ### wifi
 
-    ./bin/venv3/python wifi
+    ./bin/venv/python wifi
 
 shows the current wifi status.
 
-    ./bin/venv3/python wifi on
+    ./bin/venv/python wifi on
 
 turns the wifi on.
 
-    ./bin/venv3/python wifi off
+    ./bin/venv/python wifi off
 
 turns the wifi off.
 
