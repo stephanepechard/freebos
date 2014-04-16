@@ -1,9 +1,7 @@
-PACKAGES = requests
+PACKAGES = requests celery
 DEV_PACKAGES = nose ipdb
 
 all: py3
-
-dev: py3 py2
 
 py2:
 	[ -e venv/bin/pip ] || virtualenv venv
