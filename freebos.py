@@ -4,6 +4,7 @@
 # system
 import json
 import logging
+import pprint
 import time
 # pipped
 import requests
@@ -110,11 +111,14 @@ class FreeboxOSAPI(object):
         return(active)
 
 
-    def get_wifi_info(self):
-        """ Return the wifi information: bss, name, id, active, etc. """
+    def get_wifi_bss(self):
+        """ Return the wifi stations name. """
         response = requests.get(WIFI, headers=self.get_headers())
-        json_res = json.loads(response.text)
-        print(json.dumps(json_res, sort_keys=True, indent=4, separators=(',', ': ')))
+        jr = json.loads(response.text)
+        bss = False
+        if 'success' in jr and jr['success'] == True:
+            bss = jr['result']['bss']
+        return(bss)
 
 
     def toggle_wifi(self, active=False):
@@ -129,6 +133,26 @@ class FreeboxOSAPI(object):
             self.logger.error('Failed to update wifi status!')
 
 
+    def connected_devices(self):
+        """ Return the devices connected to the wifi bss. """
+        bss = self.get_wifi_bss()
+        devices = []
+        for wifi in bss:
+            response = requests.get(WIFI_STATIONS + wifi, headers=self.get_headers())
+            jr = json.loads(response.text)
+            if 'success' in jr and jr['success'] == True and len(jr['result']):
+                for device in jr['result']:
+                    current_device = ''
+                    for name in device['host']['names']:
+                        current_device += name['name'] if name['source'] == 'dhcp' else ''
+                    devices.append(current_device)
+                self.logger.info('Devices currently connected: ' + str(devices))
+            else:
+                self.logger.info('No device currently connected to wifi.')
+
+        return(devices)
+
+
     def wifi_on(self):
         if not self.get_wifi_status():
             self.toggle_wifi(True)
@@ -141,4 +165,6 @@ class FreeboxOSAPI(object):
             self.toggle_wifi()
             time.sleep(1)
             self.get_wifi_status()
+
+
 

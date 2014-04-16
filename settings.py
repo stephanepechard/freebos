@@ -17,6 +17,7 @@ LOGIN = API + 'login/'
 SESSION = API + 'login/session/'
 WIFI = API + 'wifi/'
 WIFI_CONFIG = API + 'wifi/config/'
+WIFI_STATIONS = API + 'wifi/stations/'
 
 
 def create_logger():

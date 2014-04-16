@@ -9,7 +9,7 @@ from freebos import FreeboxOSAPI
 
 
 def usage():
-    sys.exit("ERROR usage: switch_wifi.py [on|off]")
+    sys.exit("ERROR usage: switch_wifi.py [on|off|dev]")
 
 
 def open():
@@ -29,6 +29,8 @@ def main(argv):
             api.wifi_on()
         elif (argv[1] == "off"):
             api.wifi_off()
+        elif (argv[1] == "dev"):
+            api.connected_devices()
         else:
             usage()
     else:

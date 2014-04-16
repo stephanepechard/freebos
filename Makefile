@@ -6,10 +6,13 @@ all: py3
 dev: py3 py2
 
 py2:
-	[ -e venv2/bin/pip ] || virtualenv venv2
-	./venv2/bin/pip install $(DEV_PACKAGES) $(PACKAGES)
+	[ -e venv/bin/pip ] || virtualenv venv
+	./venv/bin/pip install $(DEV_PACKAGES) $(PACKAGES)
 	./venv/bin/pip install $(DEV_PACKAGES)
 
 py3:
-	[ -e venv/bin/pip ] || pyvenv-3.3 venv && wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py && ./venv/bin/python ez_setup.py && ./venv/bin/easy_install pip && rm -f ez_setup.py setuptools-2.1.tar.gz
-	./venv/bin/pip install $(PACKAGES)
+	[ -e venv/bin/pip ] || pyvenv venv
+	./venv/bin/pip install $(DEV_PACKAGES) $(PACKAGES)
+
+test:
+	./venv/bin/nosetests --nocapture test.py
