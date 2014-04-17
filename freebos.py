@@ -140,7 +140,7 @@ class FreeboxOSAPI(object):
         for wifi in bss:
             response = requests.get(WIFI_STATIONS + wifi, headers=self.get_headers())
             jr = json.loads(response.text)
-            if 'success' in jr and jr['success'] == True and len(jr['result']):
+            if 'success' in jr and jr['success'] and 'result' in jr and len(jr['result']):
                 for device in jr['result']:
                     current_device = ''
                     for name in device['host']['names']:
