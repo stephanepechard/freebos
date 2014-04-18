@@ -1,4 +1,4 @@
-PACKAGES = requests celery
+PACKAGES = redis requests celery
 DEV_PACKAGES = nose ipdb
 
 all: py3

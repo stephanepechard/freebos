@@ -2,11 +2,14 @@
 # -*- coding: utf-8 -*-
 
 # pipped
-from celery import task
-import redis
+from celery import task, Celery
 # local
 from freebos import FreeboxOSAPI
 from settings import APP_ID, REDIS_HOST, REDIS_PORT
+
+# celery
+celery = Celery('freebos')
+celery.config_from_object('settings')
 
 
 @task
