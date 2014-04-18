@@ -20,6 +20,23 @@ WIFI_CONFIG = API + 'wifi/config/'
 WIFI_STATIONS = API + 'wifi/stations/'
 
 
+# Celery configuration
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+BROKER_URL = 'redis://' + REDIS_HOST + ':' + str(REDIS_PORT) + '/9'
+CELERY_DEFAULT_QUEUE = APP_ID
+CELERY_TIMEZONE = 'Europe/Paris'
+CELERY_IMPORTS = ('tasks')
+CELERYD_CONCURRENCY = 1
+CELERYBEAT_SCHEDULE = {
+    'connected_devices-every-10-minutes': {
+        'task': 'tasks.connected_devices',
+        'schedule': timedelta(minutes=10),
+    },
+}
+
+
+# logger
 def create_logger():
     import logging
     logger = logging.getLogger(APP_NAME)

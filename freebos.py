@@ -146,9 +146,11 @@ class FreeboxOSAPI(object):
                     for name in device['host']['names']:
                         current_device += name['name'] if name['source'] == 'dhcp' else ''
                     devices.append(current_device)
-                self.logger.info('Devices currently connected: ' + str(devices))
-            else:
-                self.logger.info('No device currently connected to wifi.')
+
+        if devices:
+            self.logger.info('Devices currently connected: ' + str(devices))
+        else:
+            self.logger.info('No device currently connected to wifi.')
 
         return(devices)
 
@@ -165,6 +167,3 @@ class FreeboxOSAPI(object):
             self.toggle_wifi()
             time.sleep(1)
             self.get_wifi_status()
-
-
-
