@@ -34,7 +34,7 @@ CELERY_IMPORTS = ('tasks')
 CELERYD_CONCURRENCY = 1
 CELERYBEAT_SCHEDULE = {
     'connected_devices-every-10-minutes': {
-        'task': 'tasks.connected_devices',
+        'task': 'tasks.task_connected_devices',
         'schedule': timedelta(minutes=10),
     },
 }

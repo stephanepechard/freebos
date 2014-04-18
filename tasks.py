@@ -18,8 +18,6 @@ def task_connected_devices():
     api.open_session()
     devices = api.connected_devices()
 
-#    red = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=0)
-#    key = APP_ID + '.connected_devices'
-
     if not devices and self.get_wifi_status():
         api.wifi_off()
+
