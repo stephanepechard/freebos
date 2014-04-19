@@ -18,6 +18,6 @@ def task_connected_devices():
     api.open_session()
     devices = api.connected_devices()
 
-    if not devices and self.get_wifi_status():
+    if not devices and api.get_wifi_status():
         api.wifi_off()
 
