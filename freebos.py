@@ -37,7 +37,7 @@ class FreeboxOSAPI(object):
         response = requests.post(AUTHORIZE, data=json.dumps(payload))
         app_token = self.get_result(response, 'app_token')
         if app_token:
-            self.logger.info('App token: ' + app_token)
+            self.logger.debug('App token: ' + app_token)
         else:
             self.logger.error('No app token, please create one!')
 
@@ -49,7 +49,7 @@ class FreeboxOSAPI(object):
         response = requests.get(AUTHORIZE + TRACK_ID)
         self.challenge = self.get_result(response, 'challenge')
         status = self.get_result(response, 'status')
-        self.logger.info('Authorization status: ' + status)
+        self.logger.debug('Authorization status: ' + status)
 
 
     def get_result(self, response, result_name):
@@ -86,9 +86,7 @@ class FreeboxOSAPI(object):
         response = requests.post(SESSION, data=json.dumps(payload))
         self.session_token = self.get_result(response, 'session_token')
         if self.session_token:
-            self.logger.info('Session opened')
-            #permissions = self.get_result(response, 'permissions')
-            #self.logger.info(permissions)
+            self.logger.debug('Session opened')
         else:
             self.logger.error(response.text)
 
@@ -128,7 +126,7 @@ class FreeboxOSAPI(object):
                                 headers=self.get_headers())
         jr = json.loads(response.text)
         if 'success' in jr and jr['success'] == True:
-            self.logger.info('Wifi toggled')
+            self.logger.debug('Wifi toggled')
         else:
             self.logger.error('Failed to update wifi status!')
 

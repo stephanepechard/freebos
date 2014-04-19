@@ -44,11 +44,11 @@ CELERYBEAT_SCHEDULE = {
 def create_logger():
     import logging
     logger = logging.getLogger(APP_NAME)
-    logger.setLevel(logging.WARNING)
+    logger.setLevel(logging.INFO)
     formatter = logging.Formatter('%(asctime)s :: %(levelname)s :: %(message)s')
 
     steam_handler = logging.StreamHandler()
-    steam_handler.setLevel(logging.WARNING)
+    steam_handler.setLevel(logging.INFO)
     steam_handler.setFormatter(formatter)
     logger.addHandler(steam_handler)
 
